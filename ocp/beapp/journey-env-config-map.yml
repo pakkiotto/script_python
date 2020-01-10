@@ -1,0 +1,90 @@
+apiVersion: v1
+data:
+
+  # ---- Deprecated start
+  AEM_NAME: aem-client # NO USAGE
+  AEM_URL: https://myvfapp-aem.vodafone.it # NO USAGE
+  CONSUMER_BE_NAME: myvf-consumer-be  # NO USAGE
+  ANCHORS_NAME: anchors-client # NO USAGE
+
+  # consumer-be.url
+  # Usage:
+  # - journey-configuration: application.yml
+  # - journey-residual-credit: BeBalanceClient.java
+  # - journey-offer: ConsumerBe.java
+  # - journey-anchor-resolver: BeClient.java
+  # - journey-callintercept: CIPolicyClient.java
+  # - journey-invoices: BeClient.java
+  CONSUMER_BE_URL: https://my190.vodafone.it
+
+  # anchors.url
+  # Usage:
+  # - journey-residual-credit: AnchorsLookupClient.java
+  # - journey-happy: AnchorsLookupClient.java
+  # - journey-callintercept: AnchorsLookupClient.java
+  # - journey-menu: AnchorsLookupClient.java
+  # - journey-messages: AnchorsLookupClient.java
+  # - journey-invoices: BeAnchorsClient.java
+  ANCHORS_URL: https://my190.vodafone.it
+
+  # Usage:
+  # - journey-menu: MaintenanceClient.java
+  RESOURCE_TECHNICAL_SERVICES_MAINTENANCE_URL: https://my190.vodafone.it
+
+  # only when journey-common.develop = true
+  RESOURCE_TECHNICAL_SERVICES_SESSION_MANAGER_URL: http://session-manager.dxl-microservices.svc:8080/SessionManager
+
+  # ---- Deprecated end
+
+  # journey-anchor-resolver
+  # default value: https://my190.vodafone.it
+  ANCHOR_BASEURL: https://my190.vodafone.it
+
+  # my190.base-url
+  # Usage:
+  # - journey-landline
+  # - journey-payment
+  MY190_BASE_URL: https://my190.vodafone.it
+
+  # AEM
+  # Moved into a dedicated secret ?!
+  RESOURCE_AEM_AUTHENTICATION_PASSWORD: Zaqwsx12$
+  RESOURCE_AEM_AUTHENTICATION_TYPE: basic
+  RESOURCE_AEM_AUTHENTICATION_USERNAME: dxl-reader
+  RESOURCE_AEM_SERVICES_DEFAULT_BASE_URL: https://myvfapp-aem.vodafone.it
+
+  RESOURCE_FUNCTIONAL_SERVICES_NAMESPACE: dxl-microservices
+  RESOURCE_JOURNEY_SERVICES_VENDOR_PREFIX: ""
+  RESOURCE_FUNCTIONAL_SERVICES_SESSION_MANAGER_URL: http://session-manager.dxl-microservices.svc:8080/SessionManager
+
+
+  RESOURCE_EURONET_ACCOUNT_PASSWORD: f8%GhB(d7Ugt7}rx
+  # Euronet passa dall'esterno anziche dal service ( svc )
+  RESOURCE_EURONET_SERVICES_DEFAULT_BASE_URL: http://zuul-api-gateway-v1-zuul-api-gateway.dxl.vodafone.it/external/v1/geteuronet/gxml/
+  # Si potrebbe uniformare alle url di jakala e rimuovere dalle JAVA_OPTS
+  # RESOURCE_EURONET_SERVICES_DEFAULT_BASE_URL: http://zuul-api-gateway-v1-as-journey.zuul-api-gateway.svc:8080/external/v1/geteuronet/gxml/
+  RESOURCE_JAKALA_SERVICES_CAMPAIGNS_URL: http://zuul-api-gateway-v1-as-journey.zuul-api-gateway.svc:8080/external/v1/AlertHP_F42
+  RESOURCE_JAKALA_SERVICES_REWARD_URL: http://zuul-api-gateway-v1-as-journey.zuul-api-gateway.svc:8080/external/v1/getUserBalance_F15
+
+  RESOURCE_JOURNEY_SERVICES_BILLING_INFO_URL: http://journey-billing.beapp.svc:8080/api/v3
+  RESOURCE_JOURNEY_SERVICES_JS_LOGIN_URL: http://js-login.dxl-microservices.svc:8080/JsLogin
+
+
+
+  # Env Vars - Cannot be moved into journey-spring-boot-service config map
+  LOGGING_MONITORING_PORT: "9779"
+  LOGGING_MS_CREATE_APPLICATION_LOGS: /api/v1/applicationlogs
+  LOGGING_MS_CREATE_TRANSACTION_LOGS_REQUESTS: /api/v1/transactionlogs/requests
+  LOGGING_MS_CREATE_TRANSACTION_LOGS_RESPONSES: /api/v1/transactionlogs/responses
+  LOGGING_MS_GET_HYSTRIX_CONFIG: /resources/hystrix/config.properties
+  LOGGING_MS_URL: http://logging-ms.dxl-logging-platform.svc:8080
+  JAVA_OPTS: -Xms1700m -Xmx1700m -Darchaius.configurationSource.additionalUrls=http://logging-ms.dxl-logging-platform.svc:8080/resources/hystrix/config.properties
+    -Dhttp.proxyHost=10.251.254.21 -Dhttp.proxyPort=8080 -Dhttps.proxyHost=10.251.254.21
+    -Dhttps.proxyPort=8080 -Dhttp.nonProxyHosts=*.svc|*.vodafone.com|localhost|journey-*|myvfapp-aem.vodafone.it|dds-dxl.vodafone.it|zuul-api-gateway-v1-zuul-api-gateway.dxl.vodafone.it
+  SYSTEM_PROPERTIES_MODE_OVERRIDE: override
+  TZ: Europe/Rome
+  no_proxy: '*.cluster.local,.cluster.local,*.infinity.local,.infinity.local,*.svc,.svc,*.vodafone.com,.vodafone.com,myvfapp-aem.vodafone.it,.it.sedc.internal.vodafone.com,*.omnitel.it,.omnitel.it,*.omnitel.com,.omnitel.com,170,172.30.0.0/16,172.30.0.1'
+kind: ConfigMap
+metadata:
+  name: journey-env-config-map
+  namespace: beapp

@@ -1,0 +1,443 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    logging:
+      level:
+        it.assist: info
+        com.assistdigital: info
+        it.vodafone: info
+        it.assistdigital: info
+
+    dxl-logging:
+      logging-type: http
+      transaction-log-enabled: true
+      transaction-log-payload-enabled: true
+      transaction-log-extra-enabled: true
+      transaction-log-extra-header-enabled: true
+      transaction-log-external-service-enabled: true
+      application-log-enabled: false
+      application-log-severity: info
+      application-loggers:
+       - it.assist
+       - com.assistdigital
+       - org.apache.cxf
+       - it.vodafone
+
+
+    # UTILI
+    # Use anchor resolve instead of legacy backend
+    anchors.flow: dxl
+
+    # Choose which anchor inventory should be used by AnchorResolver
+    anchor.inventory.enabled: aem
+
+    # Choose between psg and dxl in:
+    # - authorization-journey
+    # - sim-journey
+    # Can be removed when refactored
+    flow.enabled: dxl
+
+
+    # Stop forwarding session-payload and session-id to functional services avoiding to perform check context
+    functional.skip.check.context: "true"
+
+    # --------------------------
+    # authorization-journey
+    # -----------------------------
+
+    # Enable push notification event into authorization-journey
+    events.notification.push.enabled: "true"
+
+    # Disable device check into /auth/guest
+    guest.skip.device: "true"
+
+    # Increase max http header size
+    server.maxhttpheadersize: "16000"
+
+    # -----------------------------
+    # Management Configuration
+    # -----------------------------
+    management.endpoint.health.show.details: always
+    management.endpoint.metrics.enabled: "true"
+    management.endpoint.prometheus.enabled: "true"
+    management.endpoints.web.basepath: /actuator
+    management.endpoints.web.exposure.include: '*'
+    management.health.rabbit.enabled: "false"
+    management.health.redis.enabled: "false"
+    management.metrics.distribution.percentileshistogram.http.server.request: "true"
+    management.metrics.distribution.sla.http.server.requests: 10ms, 20ms, 50ms, 100ms, 200ms, 500ms, 1s, 2s, 5s
+    management.metrics.export.prometheus.enabled: "true"
+    management.server.port: "8090"
+
+    # -----------------------------
+    # Common Configuration
+    # -----------------------------
+    journey.errors.include-stack-trace: true
+    journey.errors.include-transaction-id: true
+    JOURNEY_DDS_OPTIONS_CONNECTION_LIFE_TIME: "2000"
+    JOURNEY_DDS_OPTIONS_MAX_CONNECTION_IDLE_TIME: "1000"
+
+    journey-common:
+      maintenance.baseUrl: 'https://my190.vodafone.it'
+      scheduling.config.threadPoolSize: 10
+
+    # -----------------------------
+    # Common Caching Configuration
+    # -----------------------------
+    caching:
+      enabled: true
+      definitions:
+        # journey-configuration
+        device-configuration.ttl: 2 hours
+
+        # journey-sim cache
+        sim-info.ttl: 2 hours
+        sim-info-wrapped.ttl: 2 hours
+        sim-getSimInfo.ttl: 2 hours
+
+        # journey-menu cache until v1.2.1
+        anonymousMenu.ttl: 2 hours
+        anonymousMenuWrapped.ttl: 2 hours
+        simMenu.ttl: 2 hours
+        simMenuWrapped.ttl: 2 hours
+        landlineMenu.ttl: 30 minutes
+        landlineMenuWrapped.ttl: 30 minutes
+        contractMenu.ttl: 30 minutes
+        contractMenuWrapped.ttl: 30 minutes
+        # journey-menu cache until v1.4.0
+        blocked-menu-items.ttl: 1 minutes
+
+
+        # journey-menu cache since v1.2.2
+        menu-getAemMenuTemplate.ttl: 2 hours
+        menu-anonymousMenu.ttl: 2 hours
+        menu-contractMenu.ttl: 10 minutes
+        menu-landlineMenu.ttl: 10 minutes
+        menu-simMenu.ttl: 10 minutes
+
+        # journey-residual-credit cache
+        residual-credit-getAemResponse.ttl: 2 hours
+        residual-credit-getAemResponseForWidget.ttl: 2 hours
+        residual-credit-getBalance.ttl: 1 minute
+
+        # journey-happy cache
+        rewardBalance.ttl: 1 hour
+        aem-reward-box.ttl: 1 hour
+        aem-menu-entry.ttl: 1 hour
+
+        # journey-messages cache
+        preset-sticky.ttl: 1 minute
+        profiled-sticky.ttl: 1 minute
+        configurations.ttl: 1 minute
+
+        # journey-anchor-resolver inventory cache
+        anchors.inventory.ttl: 5 minutes
+
+        # journey-counter
+        counters-usageConsumptionReportFind.enabled: true
+        counters-usageConsumptionReportFind.ttl: 1 minute
+
+        # journey-banners
+        banner-overlay-content-v3.ttl: 4 minutes
+        banner-templates.ttl: 10 minutes
+        banner-sim.ttl: 10 minutes
+        banner-landline.ttl: 10 minutes
+        banner-customer.ttl: 10 minutes
+        banner-last-bill.ttl: 60 minutes
+        banner-balance.ttl: 10 minutes
+        banner-counters.ttl: 10 minutes
+        banner-allowance.ttl: 10 minutes
+        banner-happy.ttl: 60 minutes
+        banner-happy-campaigns.ttl: 60 minutes
+        banner-nba-propositions.ttl: 60 minutes
+        banner-nba-info-map.ttl: 60 minutes
+        banner-last-top-up.ttl: 5 minutes
+
+        # journey-offer
+        offer-aemProduct.ttl: 1 hours
+        offer-aemProductVas.ttl: 1 hours
+        offer-aemProductFake.ttl: 1 hours
+        offer-aemConvergent.ttl: 1 hours
+        offer-oldChainCheckActivation.ttl: 2 minutes
+        offer-ola3CheckActivation.ttl: 2 minutes
+        offer-rtmDirectCheckActivation.ttl: 2 minutes
+        offer-campaignCheckActivation.ttl: 2 minutes
+        offer-getCatalog.ttl: 10 minutes
+        offer-getActiveOffer.ttl: 10 minutes
+
+    # -----------------------------
+    # Feign Configuration
+    # -----------------------------
+    feign.client.config.default.connecttimeout: "20000"
+    feign.client.config.default.loggerlevel: headers
+    feign.client.config.default.readtimeout: "20000"
+
+    # Enable custom dxl feign logging type
+    feign.logger.type: dxl
+
+    # -----------------------------
+    # Hystrix Configuration
+    # -----------------------------
+    #
+    # see: https://github.com/Netflix/Hystrix/wiki/configuration
+    #
+    hystrix:
+      enabled: true
+      threadpool:
+        authorization-journey-login-client-v1AnonymousLoginGet:
+          coreSize: 50
+          maxQueueSize: 10
+        authorization-journey-device-client-deviceExistUsingGET:
+          coreSize: 150
+          maxQueueSize: 20
+        authorization-journey-login-client-v1LoggedLoginPost:
+          coreSize: 50
+          maxQueueSize: 10
+        authorization-journey-login-client-v1EnrichedLoginPost:
+          coreSize: 10
+          maxQueueSize: 5
+        authorization-journey-customer-web-account-client-customerWebAccountGet:
+          coreSize: 50
+          maxQueueSize: 10
+        authorization-journey-customer-management-client-retrieveCustomer:
+          coreSize: 10
+          maxQueueSize: 5
+        authorization-journey-resource-resource-client-listResourceWeb:
+          coreSize: 50
+          maxQueueSize: 10
+        authorization-journey-session-manager-client-v1SessionPatch:
+          coreSize: 50
+          maxQueueSize: 10
+        authorization-journey-gn-group-client-retrieveGNGroup:
+          coreSize: 10
+          maxQueueSize: 5
+        sim-journey-resource-inventory-client-listSim:
+          coreSize: 100
+          maxQueueSize: 20
+        sim-journey-customer-management-client-retrieveCustomer:
+          coreSize: 100
+          maxQueueSize: 20
+        journey-configuration-800-likemoments-back-end-endpoint:
+          execution.isolation:
+            thread:
+              timeoutInMilliseconds: 1500
+        offer-journey-aem-client-getProduct:
+          coreSize: 1200
+          maxQueueSize: 300
+          queueSizeRejectionThreshold: 300
+          execution.isolation:
+            thread:
+              timeoutInMilliseconds: 500
+        default:
+          coreSize: 50
+          maxQueueSize: 10
+
+    # -----------------------------
+    # Journey Family Configuration
+    # -----------------------------
+    journey.family:
+      defaultCategory:
+        id: 0
+        iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_ratings-or-favourite-64.png
+        title: Un premio per te
+      categories:
+        1:
+          id: 1
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_ratings-or-favourite-64.png
+          title: Uno sconto solo per te
+        2:
+          id: 2
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/02_market/ic_converged-proposition-64.png
+          title: Più contenuti
+        3:
+          id: 3
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_data-64.png
+          title: Più giga per te
+        4:
+          id: 4
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_dashboard-64.png
+          title: Naviga alla massima velocitÃ
+        #castelmock mapping only for develop
+        CATREW:
+          id: CATREW
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_dashboard-64.png
+          title: category title
+      promos:
+        2894:
+          id: 2894
+          title: 50 Giga con Giga Family
+          categoryId: 3
+        2895:
+          id: 2895
+          title: 100 Giga con Giga Family
+          categoryId: 3
+        2891:
+         id: 2891
+         title: 5 euro di sconto sulla tua offerta
+         categoryId: 1
+        2890:
+         id: 2890
+         title: 3 euro di sconto sulla tua offerta
+         categoryId: 1
+        2886:
+         id: 2886
+         title: Contenuti in esclusiva per te
+         categoryId: 2
+        2887:
+         id: 2887
+         title: Sblocco velocitÃ  sulla Giga Network
+         categoryId: 4
+        2888:
+         id: 2888
+         title: 10 euro di sconto sulla tua offerta
+         categoryId: 1
+        2889:
+         id: 2889
+         title: 5 euro di sconto sulla tua offerta
+         categoryId: 1
+        2892:
+         id: 2892
+         title: 50 Giga con Giga Family
+         categoryId: 3
+        2893:
+         id: 2893
+         title: 100 Giga con Giga Family
+         categoryId: 3
+        2902:
+         id: 2902
+         title: Giga illimitati per navigare in 4G
+         categoryId: 3
+
+        #castelmock mapping
+        REW:
+          id: REW
+          title: reward title
+          categoryId: CATREW
+
+    # -----------------------------
+    # Journey Counters Configuration
+    # -----------------------------
+    counters.banners.DEFAULT.anchorUrl: 'myvfit://view/hybrid?pageURL=${counters.webview.base-url-encoded}%2Fcontent%2Fmyvf-consumer%2Fapp%2Fcatalog%2Foffers.html&overlayType=none&x-a=all&pageTitle=Scopri+Nuove+Offerte&x-t=all'
+    counters.banners.CONSUMO.anchorUrl: 'myvfit://view/hybrid?pageURL=${counters.webview.base-url-encoded}%2Fcontent%2Fmyvf-consumer%2Fapp%2Fcatalog%2Foffers.html&overlayType=none&x-a=all&pageTitle=Scopri+Nuove+Offerte&x-t=all'
+    counters.travel-mondo.banner-anchor-url: 'myvfit://view/hybrid?pageURL=${counters.webview.base-url-encoded}%2Fcontent%2Fmyvf-consumer%2Fapp%2Fcatalog%2Factive-offers.html&overlayType=forced&x-a=all&pageTitle=Offerte+Attive&x-t=all'
+    counters.threshold-labels.PASSION: "Giga illimitati su"
+
+    # -----------------------------
+    # Journey Configurations Configuration
+    # -----------------------------
+    configuration.metadata.default.refreshinterval: 5 minutes
+    configuration.metadata.failure.refreshinterval: 30 seconds
+    journey-configuration.composed-resources.800-likemoments-back-end-endpoint:
+      resource: file:///opt/app-root/src/config/likemoments-${platform}-${deviceType}.yml
+
+  likemoments-android-smartphone.yml: |-
+    likemoments:
+    - start: 0
+      end: 31556995200
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/NEW_APP_D_1_5c32c95ee9ad662594c4459fe07800f3.jpg"
+        backgroundId: default
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/NEW_APP_N_1_f1d33645cf7c2f7bbdddce51d07c3651.jpg"
+        backgroundId: default
+    - start: 1514761200
+      end: 2051218800
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/Android_REMIX_Smartphone_4f4589fd520daf074d71b8efc2fa57f1.jpg"
+        backgroundId: "/appearance/Android_REMIX_Smartphone_4f4589fd520daf074d71b8efc2fa57f1.jpg"
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/Android_REMIX_Smartphone_4f4589fd520daf074d71b8efc2fa57f1.jpg"
+        backgroundId: "/appearance/Android_REMIX_Smartphone_4f4589fd520daf074d71b8efc2fa57f1.jpg"
+      profile: MIXNSHAKE
+
+  likemoments-android-tablet.yml: |-
+    likemoments:
+    - start: 0
+      end: 31556995200
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/NEW_APP_D_1_5c32c95ee9ad662594c4459fe07800f3.jpg"
+        backgroundId: default
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/NEW_APP_N_1_f1d33645cf7c2f7bbdddce51d07c3651.jpg"
+        backgroundId: default
+    - start: 1514761200
+      end: 2051218800
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/android_tablet_95f4a7279a7ac2c16f20c731112868f8.png"
+        backgroundId: "/appearance/android_tablet_95f4a7279a7ac2c16f20c731112868f8.png"
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/android_tablet_95f4a7279a7ac2c16f20c731112868f8.png"
+        backgroundId: "/appearance/android_tablet_95f4a7279a7ac2c16f20c731112868f8.png"
+      profile: MIXNSHAKE
+
+  likemoments-ios-smartphone.yml: |-
+    likemoments:
+    - start: 0
+      end: 31556995200
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/NEW_APP_D_1_5c32c95ee9ad662594c4459fe07800f3.jpg"
+        backgroundId: default
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/NEW_APP_N_1_f1d33645cf7c2f7bbdddce51d07c3651.jpg"
+        backgroundId: default
+    - start: 1514761200
+      end: 2051218800
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/ios_smartphone_0e3f4ba7f74da1b63a16ef2b771490e2.png"
+        backgroundId: "/appearance/ios_smartphone_0e3f4ba7f74da1b63a16ef2b771490e2.png"
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/ios_smartphone_0e3f4ba7f74da1b63a16ef2b771490e2.png"
+        backgroundId: "/appearance/ios_smartphone_0e3f4ba7f74da1b63a16ef2b771490e2.png"
+      profile: MIXNSHAKE
+
+  likemoments-ios-tablet.yml: |-
+    likemoments:
+    - start: 0
+      end: 31556995200
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/NEW_APP_D_1_5c32c95ee9ad662594c4459fe07800f3.jpg"
+        backgroundId: default
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/NEW_APP_N_1_f1d33645cf7c2f7bbdddce51d07c3651.jpg"
+        backgroundId: default
+    - start: 1514761200
+      end: 2051218800
+      backgrounds:
+      - startTime: '06:30:00'
+        endTime: '18:00:00'
+        image: "/appearance/ios_tablet_937772a4a1175871fa4d57e94b03fb5c.jpg"
+        backgroundId: "/appearance/ios_tablet_937772a4a1175871fa4d57e94b03fb5c.jpg"
+      - startTime: '18:00:00'
+        endTime: '06:30:00'
+        image: "/appearance/ios_tablet_937772a4a1175871fa4d57e94b03fb5c.jpg"
+        backgroundId: "/appearance/ios_tablet_937772a4a1175871fa4d57e94b03fb5c.jpg"
+      profile: MIXNSHAKE
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2019-01-15T10:59:41Z
+  name: journey-spring-boot-service
+  namespace: beapp
+  resourceVersion: "368327915"
+  selfLink: /api/v1/namespaces/beapp/configmaps/journey-spring-boot-service
+  uid: a8ae475d-18b4-11e9-85d8-005056951a80

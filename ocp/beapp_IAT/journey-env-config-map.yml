@@ -1,0 +1,56 @@
+apiVersion: v1
+data:
+  ANCHOR_BASEURL: https://staging.my190.vodafone.it
+  ANCHOR_INVENTORY_ENABLED: aem
+  ANCHORS_FLOW: dxl
+  ANCHORS_NAME: anchors-client
+  ANCHORS_URL: https://staging.my190.vodafone.it/env_iota
+  CONSUMER_BE_NAME: consumer-be-client
+  CONSUMER_BE_URL: https://staging.my190.vodafone.it/env_iota
+  EVENTS_NOTIFICATION_PUSH_ENABLED: "true"
+  FLOW_ENABLED: dxl
+  FUNCTIONAL_SKIP_CHECK_CONTEXT: "true"
+  JAVA_OPTS: -DXarchaius.configurationSource.additionalUrls=http://logging-ms.dxl-logging-platform.svc:8080/resources/hystrix/config.properties  -Dhttp.proxyHost=10.251.254.21
+    -Dhttp.proxyPort=8080 -Dhttps.proxyHost=10.251.254.21 -Dhttps.proxyPort=8080 -Dhttp.nonProxyHosts=*.svc|*.vodafone.com|localhost|journey-*|myvfapp-aem-iat.vodafone.it|dds-dxl-iat.vodafone.it
+  JOURNEY_COMMON_CHANNEL: BE
+  JOURNEY_COVERAGE_CAPGEMINI_GEA_ENDPOINT: http://geamaps.dsl.vodafone.it/5tacche/services/Vf5TaccheMobileService.Vf5TaccheMobileServiceHttpSoap12Endpoint/
+  LOGGING_MONITORING_PORT: "9779"
+  LOGGING_MS_CREATE_APPLICATION_LOGS: /api/v1/applicationlogs
+  LOGGING_MS_CREATE_TRANSACTION_LOGS_REQUESTS: /api/v1/transactionlogs/requests
+  LOGGING_MS_CREATE_TRANSACTION_LOGS_RESPONSES: /api/v1/transactionlogs/responses
+  LOGGING_MS_GET_HYSTRIX_CONFIG: /resources/hystrix/config.properties
+  LOGGING_MS_URL: http://logging-ms.dxl-logging-platform.svc:8080
+  MAINTENANCE_NAME: maintenance-client
+  MAINTENANCE_URL: https://staging.my190.vodafone.it/env_iota
+  MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: always
+  MANAGEMENT_ENDPOINT_METRICS_ENABLED: "true"
+  MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: "true"
+  MANAGEMENT_ENDPOINTS_WEB_BASEPATH: /actuator
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
+  MANAGEMENT_HEALTH_MONGO_ENABLED: "false"
+  MANAGEMENT_HEALTH_RABBIT_ENABLED: "false"
+  MANAGEMENT_HEALTH_REDIS_ENABLED: "false"
+  MANAGEMENT_METRICS_DISTRIBUTION_PERCENTILESHISTOGRAM_HTTP_SERVER_REQUEST: "true"
+  MANAGEMENT_METRICS_DISTRIBUTION_SLA_HTTP_SERVER_REQUESTS: 500ms, 1s, 2s, 5s
+  MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: "true"
+  MANAGEMENT_SERVER_PORT: "8090"
+  MICROMETER_ELASTIC_ENABLED: "false"
+  RESOURCE_AEM_AUTHENTICATION_PASSWORD: Zaqwsx12$
+  RESOURCE_AEM_AUTHENTICATION_TYPE: basic
+  RESOURCE_AEM_AUTHENTICATION_USERNAME: dxl-reader
+  RESOURCE_AEM_SERVICES_DEFAULT_BASE_URL: https://myvfapp-aem-iat.vodafone.it
+  RESOURCE_FUNCTIONAL_SERVICES_NAMESPACE: dxl-microservices
+  RESOURCE_FUNCTIONAL_SERVICES_SESSION_MANAGER_URL: http://session-manager.dxl-microservices.svc:8080/SessionManager
+  RESOURCE_JAKALA_SERVICES_REWARD_URL: http://zuul-api-gateway.zuul-api-gateway.svc:8080/external/v1/getUserBalance_F15
+  RESOURCE_JOURNEY_SERVICES_BILLING_INFO_URL: http://journey-billing.beapp-bs.svc:8080
+  RESOURCE_JOURNEY_SERVICES_JS_LOGIN_URL: http://js-login.dxl-microservices.svc:8080/JsLogin
+  RESOURCE_JOURNEY_SERVICES_VENDOR_PREFIX: ""
+  RESOURCE_TECHNICAL_SERVICES_MAINTENANCE_URL: https://staging.my190.vodafone.it/env_iota
+  SYSTEM_PROPERTIES_MODE_OVERRIDE: override
+  TZ: Europe/Rome
+  X_PROPERTY_DELETED_RESOURCE_JOURNEY_SERVICES_MESSAGES_URL: https://staging.my190.vodafone.it/env_iota/api/v3
+  journey-common.maintenance.baseUrl: https://staging.my190.vodafone.it/env_iota
+kind: ConfigMap
+metadata:
+  name: journey-env-config-map
+  namespace: beapp

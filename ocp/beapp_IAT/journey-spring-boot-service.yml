@@ -1,0 +1,253 @@
+apiVersion: v1
+data:
+  application.yaml: |-
+    spring:
+      boot:
+        admin:
+          client:
+            auto-deregistration: true
+            # url: http://spring-boot-admin-server:8080
+            instance:
+              prefer-ip: true
+
+    anchors:
+      flow: dxl
+      jwt: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluLmZvbyIsInJvbGVzIjpbImFkbWluIiwiYWR2ZXJ0aXNlX3JlYWRfb25seSIsImFkdmVydGlzZV9lZGl0b3IiLCJtYWludF9yZWFkX29ubHkiLCJtYWludF9lZGl0b3IiLCJtYWludF9zZXR0aW5ncyIsIm1haW50X2FkbWluX3NldHRpbmdzIiwicHVzaF9yZWFkX29ubHkiLCJwdXNoX2VkaXRvciIsInB1c2hfc2V0dGluZyIsInB1c2hfcHVibGlzaGVyIiwicHVzaF9hZG1pbiIsIm5ldGd1YXJfcmVhZF9vbmx5IiwibmV0Z3Vhcl9lZGl0b3IiLCJuZXRndWFyX3B1Ymxpc2hlciIsImFuYWx5dGljcyIsImFuY2hvcl9yZWFkX29ubHkiLCJhbmNob3JfZWRpdG9yIiwiYW5jaG9yX3B1Ymxpc2hlciIsImFuY2hvcl9hZG1pbiIsImFjbF9saXN0X3JlYWRfb25seSIsImFjbF9saXN0X2VkaXRvciIsImFjbF9saXN0X3B1Ymxpc2hlciIsImV2YV9yZWFkX29ubHkiLCJldmFfZWRpdG9yIiwiZXZhX3B1Ymxpc2hlciIsImV2YV9hY2xfbGlzdF9tc2lzZG4iLCJldmFfYWNsX2xpc3RfcHJvZmlsZSIsImFwcGVhcmFuY2VfcmVhZF9vbmx5IiwiYXBwZWFyYW5jZV9lZGl0b3IiLCJhcHBlYXJhbmNlX3B1Ymxpc2hlciIsImFwcGVhcmFuY2VfYWRtaW4iLCJjYWxsX2ludGVyY2VwdF9yZWFkX29ubHkiLCJjYWxsX2ludGVyY2VwdF9lZGl0b3IiLCJjYWxsX2ludGVyY2VwdF9wdWJsaXNoZXIiLCJjYWxsX2ludGVyY2VwdF9hZG1pbiIsImNhbGxfbWVfYmFja19yZWFkX29ubHkiLCJjYWxsX21lX2JhY2tfZWRpdG9yIiwiY2FsbF9tZV9iYWNrX3B1Ymxpc2hlciIsInByb2ZpbGVfcmVhZF9vbmx5IiwicHJvZmlsZV9lZGl0b3IiLCJwcm9maWxlX3B1Ymxpc2hlciIsImFsZXJ0X3JlYWRfb25seSIsImFsZXJ0X2VkaXRvciIsImFsZXJ0X3B1Ymxpc2hlciIsIm1vbm9wb2xpX3JlYWRfb25seSIsIm1vbm9wb2xpX2VkaXRvciIsIm1vbm9wb2xpX3B1Ymxpc2hlciIsImNoYXR0eV9ldmFfcmVhZF9vbmx5IiwiY2hhdHR5X2V2YV9lZGl0b3IiLCJjaGF0dHlfZXZhX3B1Ymxpc2hlciIsImNoYXR0eV9ldmFfYWNsX2xpc3RfbXNpc2RuIiwiY2hhdHR5X2V2YV9hY2xfbGlzdF9wcm9maWxlIiwibWV0YWRhdGlfcmVhZF9vbmx5IiwibWV0YWRhdGlfZWRpdG9yIiwibWV0YWRhdGlfcHVibGlzaGVyIiwiY291bnRlcl9yZWFkX29ubHkiLCJjb3VudGVyX2VkaXRvciIsImNvdW50ZXJfcHVibGlzaGVyIiwiY29uc3VtZXJfc3RhdGlzdGljTmV3IiwiY29uc3VtZXJfd3NlcnJvcnMiLCJjb25zdW1lcl9tZWRpYSIsImNvbnN1bWVyX3B1c2giLCJjb25zdW1lcl9tZXRhZGF0aSIsImNvbnN1bWVyX2ZhcSIsImNvbnN1bWVyX21haW50ZW5hbmNlIiwiY29uc3VtZXJfY2F0YWxvZyIsImNvbnN1bWVyX3ZhcyIsImNvbnN1bWVyX2NvbnZlcmdlbmNlIiwiY29uc3VtZXJfaW5mb1B1c2giLCJjb25zdW1lcl9id2J3c2Vycm9ycyIsImNvbnN1bWVyX2NsYWltMiIsImNvbnN1bWVyX2luZm9ORyIsImNvbnN1bWVyX2JpemJ3YndzZXJyb3JzIiwiY29uc3VtZXJfYml6dm9kYWZvbmV3c2Vycm9ycyIsImNvbnN1bWVyX2R1bXBSZXF1ZXN0IiwiY29uc3VtZXJfYW5jaG9ycyIsImNvbnN1bWVyX3ZpcnR1YWxBc3Npc3RhbnQiLCJjb25zdW1lcl9ibGFja2xpc3QiLCJjb25zdW1lcl9hZHZlcnRpc2UiLCJjb25zdW1lcl9hbGVydHMiLCJjb25zdW1lcl9uYmEiLCJjb25zdW1lcl9wcm9maWxlTmV3IiwiY29uc3VtZXJfbW9ub3BvbHkiLCJjb25zdW1lcl90bnBzSW5mbyIsImF1dGhlbnRpY2F0ZWQiLCJhbm9ueW1vdXMiLCJtYWludF9hZG1pbiIsImNvbnN1bWVyX2N4eCIsInB1c2gtdGVtcGxhdGVfcmVhZF9vbmx5IiwicHVzaC10ZW1wbGF0ZV9lZGl0b3IiLCJwdXNoLXRlbXBsYXRlX3B1Ymxpc2hlciIsImFsZXJ0X2FjbF9saXN0IiwiY3h4LXJldHJ5X3JlYWRfb25seSIsImN4eC1yZXRyeV9lZGl0b3IiLCJjeHgtcmV0cnlfcHVibGlzaGVyIiwiYXBwLWNvbmZpZ19yZWFkX29ubHkiLCJhcHAtY29uZmlnX2VkaXRvciIsImFwcC1jb25maWdfcHVibGlzaGVyIiwiYWRtaW5pc3RyYXRvcl9yZWFkX29ubHkiLCJhZG1pbmlzdHJhdG9yX2VkaXRvciIsImNvbnN1bWVyX25ldHdvcmsiLCJjb25zdW1lcl9id2IiLCJjb25zdW1lcl90bnBzIiwiY29uc3VtZXJfaW5mb2NiIiwiY29uc3VtZXJfbWVzc2FnZSIsImNvbnN1bWVyX3N0YXRpc3RpY3MtYXBpIl0sImV4cCI6MzI1MzUxMjYwMDB9.AFvo7LIUMnlie25fUlbWSyb0WdZCmRWnhqWVLEyPyE8
+
+    journey.item-ownership.items:
+      - msisdn
+
+    journey-configuration.composed-resources.900-privacy-setup-url:
+      resource: literal
+      value:
+        agreements:
+          setupPageUrl: https://staging.my190.vodafone.it//content/myvf-consumer/app/consents/welcome.html
+
+    configuration-compose:
+      700-sticky-feed-extended-url.options.required: false
+      400-aem-user-selector.options.required: false
+      500-aem-notifications.options.required: false
+      830-default-alert:
+        resource: ${resource.aem.services.default.base-url}/content/experience-fragments/banners/default-alert/master.contents.json
+        options:
+          parentKey: banners
+          scheduled: true
+          refreshInterval: ${configuration.metadata.default.refreshInterval}
+          retryFailureInterval: ${configuration.metadata.failure.refreshInterval}
+          required: false
+      860-default-bottom-card:
+        resource: ${resource.aem.services.default.base-url}/content/experience-fragments/banners/default-bottom/master.contents.json
+        options:
+          parentKey: banners
+          scheduled: true
+          refreshInterval: ${configuration.metadata.default.refreshInterval}
+          retryFailureInterval: ${configuration.metadata.failure.refreshInterval}
+          required: false
+
+    journey.family:
+      defaultCategory:
+        id: 0
+        iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_ratings-or-favourite-64.png
+        title: Un premio per te
+      categories:
+        1:
+          id: 1
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_ratings-or-favourite-64.png
+          title: Uno sconto solo per te
+        2:
+          id: 2
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/02_market/ic_converged-proposition-64.png
+          title: Più contenuti
+        3:
+          id: 3
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_data-64.png
+          title: Più giga per te
+        4:
+          id: 4
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_dashboard-64.png
+          title: Naviga alla massima velocità
+        #castelmock mapping only for develop
+        CATREW:
+          id: CATREW
+          iconUrl: ${resource.aem.services.default.base-url}/content/dam/myvf/icons/black/01_system/ic_dashboard-64.png
+          title: category title
+      promos:
+        2894:
+          id: 2894
+          title: 30 Giga per navigare in 4G
+          categoryId: 3
+        2895:
+          id: 2895
+          title: 60 Giga per navigare in 4G
+          categoryId: 3
+        2891:
+         id: 2891
+         title: 5 euro di sconto sulla tua offerta
+         categoryId: 1
+        2890:
+         id: 2890
+         title: 3 euro di sconto sulla tua offerta
+         categoryId: 1
+        2886:
+         id: 2886
+         title: Contenuti in esclusiva per te
+         categoryId: 2
+        2887:
+         id: 2887
+         title: Sblocco velocita' sulla GigaNetwork 5G
+         categoryId: 4
+        2888:
+         id: 2888
+         title: 3 euro di sconto sulla tua offerta
+         categoryId: 1
+        2889:
+         id: 2889
+         title: 5 euro di sconto sulla tua offerta
+         categoryId: 1
+        2892:
+         id: 2892
+         title: 30 Giga per navigare in 4G
+         categoryId: 3
+        2893:
+         id: 2893
+         title: 60 Giga per navigare in 4G
+         categoryId: 3
+        2902:
+         id: 2902
+         title: Giga illimitati per navigare in 4G
+         categoryId: 3
+
+        #castelmock mapping
+        REW:
+          id: REW
+          title: reward title
+          categoryId: CATREW
+
+    caching:
+      enabled: false
+      definitions:
+
+        # journey-banners
+        banner-overlay-content-v3.ttl: 1 minutes
+        banner-templates.ttl: 1 minutes
+        banner-sim.ttl: 10 minutes
+        banner-landline.ttl: 10 minutes
+        banner-customer.ttl: 10 minutes
+        banner-last-bill.ttl: 60 minutes
+        banner-balance.ttl: 5 minutes
+        banner-counters.enabled: false
+        banner-counters.ttl: 5 minutes
+        banner-allowance.ttl: 5 minutes
+        banner-happy.ttl: 60 minutes
+        banner-happy-campaigns.ttl: 60 minutes
+        banner-nba-propositions.ttl: 60 minutes
+        banner-nba-info-map.ttl: 60 minutes
+        banner-last-top-up.ttl: 5 minutes
+
+        # journey-configuration
+        # device-configuration:
+        #  ttl: 2 minutes
+
+        # journey-sim cache
+        sim-info:
+          ttl: 2 minutes
+
+        # journey-menu cache
+        anonymousMenu:
+          ttl: 1 minute
+        anonymousMenuWrapped:
+          ttl: 1 minute
+        simMenu:
+          ttl: 1 minute
+        simMenuWrapped:
+          ttl: 1 minute
+        landlineMenu:
+          ttl: 1 minute
+        landlineMenuWrapped:
+          ttl: 1 minute
+        contractMenu:
+          ttl: 1 minute
+        contractMenuWrapped:
+          ttl: 1 minute
+        blocked-menu-items:
+          ttl: 2 minutes
+
+        # journey-residual-credit cache
+        getBalanceBox:
+          ttl: 1 minute
+        getBalance:
+          ttl: 1 minute
+
+        # journey-happy cache
+        rewardBalance:
+          ttl: 15 minute
+        aem-reward-box:
+          ttl: 15 minute
+        aem-menu-entry:
+          ttl: 15 minute
+
+        # journey-messages cache
+        preset-sticky:
+          ttl: 1 minute
+        profiled-sticky:
+          ttl: 1 minute
+        configurations:
+          ttl: 1 minute
+
+        # journey-offer
+        offer-aemProduct.ttl: 2 minutes
+        offer-oldChainCheckActivation.ttl: 2 minutes
+        offer-ola3CheckActivation.ttl: 2 minutes
+        offer-rtmDirectCheckActivation.ttl: 2 minutes
+        offer-campaignCheckActivation.ttl: 2 minutes
+
+    dxl-logging:
+      transaction-log-enabled: true
+      transaction-log-payload-enabled: true
+      external-service-log-enabled: true
+      transaction-log-external-service-enabled: true
+      send-statistics-header-enabled: true
+      transaction-log-extra-enabled: true
+      transaction-log-extra-header-enabled: true
+      application-log-severity: info
+      application-log-enabled: true
+      application-loggers:
+       - it.assist
+       - com.assistdigital
+
+    feign:
+      client:
+        config:
+          default:
+            loggerLevel: FULL
+
+    hystrix:
+      enabled: true
+      threadpool:
+        offer-journey-aem-client-getProduct:
+          execution.isolation:
+            thread:
+              timeoutInMilliseconds: 500
+
+    management:
+        health:
+            redis.enabled: false
+            mongo.enabled: false
+
+    logging:
+      level:
+        root: info
+        it.assist: debug
+        com.assistdigital: debug
+        it.assistdigital: debug
+        org.apache.cxf.services: info
+        it.assist.dxl.starter.journey.logging.rabbit: warn
+        it.assist.dxl.starter.journey.logging: warn
+        it.assist.dxl.starter.journey.logging.DxlLoggingAutoConfiguration: info
+        it.assist.dxl.starter.journey.item.ownership.ItemOwnershipCheckFilterInterceptor: error
+        it.assist.dxl.starter.journey.hystrix.extension: warn
+
+kind: ConfigMap
+metadata:
+  name: journey-spring-boot-service
+  namespace: beapp
