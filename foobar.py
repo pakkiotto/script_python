@@ -112,3 +112,11 @@ for t in map(lambda t: mytuple(*t), list_o_tuples):
     print(t.name)
 
 print(type( mytuple))
+
+#Controllare se la key è presente in d e d2 se non c'è in uno riportarla
+#matrice[k][dict1val][dict2val]
+d = {'a': {'3': 3}, 'c': {'d':{'e':2}}, 'arr': [{'a': 1}, {'a': 2}]}
+d2 = {'a': {'3': 4}, 'c': {'d':{'e':2, 'f':'x'}}, 'arr': [{'a': 1}, {'a': 3}], 'l':'f'}
+#
+envs = ['DICT1', 'DICT2']
+dicts = [d,d2]
